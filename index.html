@@ -4,36 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Mom</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            /* --- DAY THEME (Coquette) --- */
-            --bg-color: #fcf6f5;       
-            --card-bg: #ffffff;        
-            --text-main: #4a3b3b;      
-            --text-sub: #6d5e5e;       
-            --accent: #d4a5a5;         
-            --border: #e6dcdc;         
-            --shadow: rgba(74, 59, 59, 0.08);
-            --toggle-bg: #f0e6e6;
-            --input-bg: rgba(255, 255, 255, 0.5);
+            /* --- DAY THEME (Coquette Aesthetic) --- */
+            --bg-color: #fdf6f6;       /* Very Pale Pink/White */
+            --card-bg: #ffffff;        /* Pure White */
+            --text-main: #5d4037;      /* Deep Brown (High Contrast) */
+            --text-sub: #795548;       /* Softer Brown */
+            --accent: #d8829d;         /* Coquette Rose */
+            --border: #ebd4d4;         
+            --shadow: rgba(93, 64, 55, 0.1);
+            --toggle-bg: #faeaea;
+            --input-bg: #fff0f5;
         }
 
         body.dark-mode {
-            /* --- NIGHT THEME (Vintage Cinema) --- */
-            --bg-color: #1a1818;       
-            --card-bg: #242222;        
-            --text-main: #e8dede;      
-            --text-sub: #b0a3a3;       
-            --accent: #bfafb2;         
-            --border: #3d3636;
-            --shadow: rgba(0, 0, 0, 0.4);
-            --toggle-bg: #332f2f;
-            --input-bg: rgba(255, 255, 255, 0.1);
+            /* --- NIGHT THEME (Cinema/Luxe) --- */
+            --bg-color: #121212;       /* Cinematic Black */
+            --card-bg: #1e1e1e;        /* Dark Grey Card */
+            --text-main: #ececec;      /* Bright White */
+            --text-sub: #b0b0b0;       /* Silver */
+            --accent: #e0b0ff;         /* Mauve/Purple Glow */
+            --border: #333333;
+            --shadow: rgba(0, 0, 0, 0.5);
+            --toggle-bg: #2d2d2d;
+            --input-bg: #2d2d2d;
         }
 
-        /* 1. RESET & LAYOUT */
+        /* 1. LAYOUT & RESET */
         * { box-sizing: border-box; }
         body, html {
             margin: 0;
@@ -42,8 +42,9 @@
             font-family: 'Montserrat', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
-            transition: background 0.6s ease, color 0.6s ease;
+            transition: background 0.8s ease, color 0.8s ease;
             overflow: hidden; 
+            position: relative;
         }
 
         .container {
@@ -54,17 +55,18 @@
             height: 100vh;
             position: relative;
             z-index: 10;
+            padding: 20px;
         }
 
-        /* 2. AESTHETIC TOGGLE */
+        /* 2. TOGGLE BUTTON (Top Right) */
         .mode-toggle {
             position: absolute;
-            top: 25px;
-            right: 25px;
+            top: 20px;
+            right: 20px;
             background: var(--toggle-bg);
             border: 1px solid var(--border);
-            padding: 10px 15px;
-            border-radius: 30px;
+            padding: 10px 20px;
+            border-radius: 50px;
             cursor: pointer;
             font-family: 'Playfair Display', serif;
             font-size: 0.9rem;
@@ -72,141 +74,145 @@
             letter-spacing: 1px;
             transition: all 0.3s ease;
             z-index: 100;
+            box-shadow: 0 4px 10px var(--shadow);
         }
-        .mode-toggle:hover { letter-spacing: 2px; }
+        .mode-toggle:hover { transform: scale(1.05); }
 
-        /* 3. THE GAME UI */
+        /* 3. GAME SECTION */
         #game-area {
             text-align: center;
             transition: opacity 0.5s ease;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            box-shadow: 0 10px 30px var(--shadow);
         }
 
         .riddle-text {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-            font-style: italic;
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            line-height: 1.4;
+            color: var(--text-main);
         }
 
         .game-input {
             display: block;
             margin: 0 auto 20px auto;
             background: var(--input-bg);
-            border: none;
-            border-bottom: 2px solid var(--text-main);
+            border: 1px solid var(--border);
+            border-radius: 10px;
             padding: 15px;
-            width: 280px;
+            width: 100%;
+            max-width: 300px;
             font-family: 'Montserrat', sans-serif;
             font-size: 1.1rem;
             color: var(--text-main);
             text-align: center;
             outline: none;
-            transition: border-color 0.3s;
+            transition: 0.3s;
         }
-        
-        .game-input:focus { border-bottom-color: var(--accent); }
+        .game-input:focus { border-color: var(--accent); }
 
         .unlock-btn {
-            background: transparent;
-            border: 1px solid var(--text-main);
-            color: var(--text-main);
-            padding: 12px 35px;
+            background: var(--accent);
+            border: none;
+            color: #fff;
+            padding: 15px 40px;
             font-family: 'Playfair Display', serif;
             font-size: 1.1rem;
+            border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
             letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-
-        .unlock-btn:hover {
-            background: var(--text-main);
-            color: var(--bg-color);
-            letter-spacing: 2px;
-        }
+        .unlock-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
 
         .error-msg {
-            color: var(--accent);
-            height: 20px;
-            margin-top: 10px;
+            color: #e57373;
+            margin-top: 15px;
             font-size: 0.9rem;
-            font-weight: 500;
             opacity: 0;
             transition: opacity 0.3s;
+            min-height: 20px;
         }
 
-        /* 4. THE CARD (Hidden) */
+        /* 4. THE SURPRISE CARD (Hidden) */
         #card-content {
             display: none;
             opacity: 0;
             transition: opacity 1.5s ease;
-            width: 90%;
-            max-width: 400px;
+            width: 100%;
+            max-width: 420px;
             background: var(--card-bg);
-            padding: 40px 30px;
+            padding: 30px;
+            border-radius: 15px;
             border: 1px solid var(--border);
-            box-shadow: 0 20px 50px var(--shadow);
+            box-shadow: 0 20px 60px var(--shadow);
             text-align: center;
             position: relative;
         }
 
-        /* 5. PHOTO FRAME */
+        /* 5. POLAROID FRAME (No Cropping) */
         .photo-frame {
-            width: 100%;
-            background: #fff; 
-            padding: 12px 12px 40px 12px; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            margin-bottom: 35px;
-            transform: rotate(-1.5deg); 
+            background: #fff; /* Always white for Polaroid look */
+            padding: 15px 15px 50px 15px; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            transform: rotate(-2deg); 
             transition: transform 0.5s ease;
+            border: 1px solid #eee;
         }
-        .photo-frame:hover { transform: rotate(0deg) scale(1.01); }
+        .photo-frame:hover { transform: rotate(0deg) scale(1.02); }
 
         .photo-frame img {
             width: 100%;
-            height: auto; 
+            height: auto; /* Ensures full image is visible */
             display: block;
-            filter: grayscale(10%) contrast(105%); 
         }
 
         /* 6. TYPOGRAPHY */
         h1 {
             font-family: 'Playfair Display', serif;
-            font-weight: 400;
-            font-size: 2.2rem;
+            font-weight: 700;
+            font-size: 2rem;
             margin: 0 0 15px 0;
-            color: var(--text-main);
-            letter-spacing: -0.5px;
+            color: var(--accent);
         }
         p {
-            font-size: 0.95rem;
-            line-height: 1.8;
+            font-size: 1rem;
+            line-height: 1.7;
             color: var(--text-sub);
-            font-weight: 300;
+            font-weight: 500; /* Bolder text for visibility */
             margin-bottom: 30px;
         }
         .signature {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 1.1rem;
-            color: var(--accent);
+            font-size: 1.2rem;
+            color: var(--text-main);
         }
 
-        /* 7. DECORATIONS */
+        /* 7. ILLUSTRATIONS (Coquette Bows & Sparkles) */
         .bg-deco {
             position: absolute;
             pointer-events: none;
             transition: opacity 0.8s ease;
             z-index: 1;
             fill: var(--accent);
-            opacity: 0.4;
+            opacity: 0.3;
         }
-        .bow { opacity: 0.6; }
+        /* Day Mode: Bows */
+        .bow { opacity: 0.5; }
+        /* Night Mode: Sparkles */
         .sparkle { opacity: 0; }
         
         body.dark-mode .bow { opacity: 0; }
         body.dark-mode .sparkle { opacity: 0.8; }
 
-        /* 8. CONFETTI */
+        /* Confetti Canvas */
         #confetti-canvas {
             position: absolute;
             top: 0; left: 0;
@@ -220,20 +226,20 @@
 
     <button class="mode-toggle" onclick="toggleTheme()">Day / Night</button>
 
-    <svg class="bg-deco bow" width="100" height="100" viewBox="0 0 100 100" style="top: 10%; left: 5%; transform: rotate(-15deg);">
+    <svg class="bg-deco bow" width="100" height="100" viewBox="0 0 100 100" style="top:10%; left:5%; transform:rotate(-15deg);">
         <path d="M50 50 C 30 20, 0 30, 20 60 C 30 70, 45 55, 50 50 C 55 55, 70 70, 80 60 C 100 30, 70 20, 50 50 Z" />
         <path d="M50 50 L 30 90 M 50 50 L 70 90" stroke="currentColor" stroke-width="3" fill="none"/>
     </svg>
-    <svg class="bg-deco bow" width="120" height="120" viewBox="0 0 100 100" style="bottom: 10%; right: 5%; transform: rotate(15deg);">
+    <svg class="bg-deco bow" width="120" height="120" viewBox="0 0 100 100" style="bottom:10%; right:5%; transform:rotate(15deg);">
         <path d="M50 50 C 30 20, 0 30, 20 60 C 30 70, 45 55, 50 50 C 55 55, 70 70, 80 60 C 100 30, 70 20, 50 50 Z" />
         <path d="M50 50 L 30 90 M 50 50 L 70 90" stroke="currentColor" stroke-width="3" fill="none"/>
     </svg>
 
-    <svg class="bg-deco sparkle" width="40" height="40" viewBox="0 0 50 50" style="top: 15%; right: 10%;">
-        <path d="M25 0 L 30 20 L 50 25 L 30 30 L 25 50 L 20 30 L 0 25 L 20 20 Z" />
+    <svg class="bg-deco sparkle" width="40" height="40" viewBox="0 0 50 50" style="top:15%; right:10%;">
+        <polygon points="25,0 30,20 50,25 30,30 25,50 20,30 0,25 20,20"/>
     </svg>
-    <svg class="bg-deco sparkle" width="60" height="60" viewBox="0 0 50 50" style="bottom: 20%; left: 8%;">
-        <path d="M25 0 L 30 20 L 50 25 L 30 30 L 25 50 L 20 30 L 0 25 L 20 20 Z" />
+    <svg class="bg-deco sparkle" width="60" height="60" viewBox="0 0 50 50" style="bottom:20%; left:8%;">
+        <polygon points="25,0 30,20 50,25 30,30 25,50 20,30 0,25 20,20"/>
     </svg>
 
     <canvas id="confetti-canvas"></canvas>
@@ -244,16 +250,14 @@
             <div class="riddle-text">
                 To open this gift,<br>guess who misses you the most?
             </div>
-            
             <input type="text" id="guess-input" class="game-input" placeholder="Type name here..." autocomplete="off">
-            
-            <button class="unlock-btn" onclick="checkAnswer()">Unlock Gift</button>
-            <div id="error-msg" class="error-msg">Incorrect! Hint: It's your favorite child.</div>
+            <button class="unlock-btn" onclick="checkAnswer()">Unlock</button>
+            <div id="error-msg" class="error-msg">Hint: It's your favorite child!</div>
         </div>
 
         <div id="card-content">
             <div class="photo-frame">
-                <img src="mom.jpeg" alt="Portrait">
+                <img src="mom.jpg" alt="Mom">
             </div>
             
             <h1>Happy Birthday!</h1>
@@ -284,17 +288,15 @@
             const errorMsg = document.getElementById('error-msg');
             const answer = input.value.trim().toLowerCase();
             
-            // ACCEPTABLE ANSWERS (All lower case)
-            const validAnswers = ['shivashri', 'shri', 'me', 'i do', 'you'];
-
-            if (validAnswers.some(a => answer.includes(a))) {
+            // Accepted answers
+            if (answer.includes('shivashri') || answer.includes('shri') || answer.includes('me') || answer.includes('i do')) {
                 revealSurprise();
             } else {
-                // Wrong answer animation
-                input.style.borderBottomColor = 'red';
+                // Shake effect for wrong answer
+                input.style.borderColor = 'red';
                 errorMsg.style.opacity = '1';
                 setTimeout(() => {
-                    input.style.borderBottomColor = 'var(--text-main)';
+                    input.style.borderColor = 'var(--border)';
                     errorMsg.style.opacity = '0';
                 }, 2000);
             }
@@ -306,16 +308,16 @@
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         let confetti = [];
-        const colors = ['#d4a5a5', '#e6dcdc', '#bfafb2', '#a89f91'];
+        const colors = ['#d8829d', '#ffc1cc', '#e6dcdc', '#ffffff'];
 
         function createConfetti() {
-            for (let i = 0; i < 80; i++) { 
+            for (let i = 0; i < 100; i++) {
                 confetti.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height - canvas.height,
                     color: colors[Math.floor(Math.random() * colors.length)],
-                    size: Math.random() * 4 + 2,
-                    speed: Math.random() * 2 + 1, 
+                    size: Math.random() * 5 + 2,
+                    speed: Math.random() * 3 + 1,
                     oscillation: Math.random() * 20
                 });
             }
@@ -325,30 +327,24 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             confetti.forEach((c, index) => {
                 c.y += c.speed;
-                c.x += Math.sin(c.y / 50) * 1; 
+                c.x += Math.sin(c.y / 30) * 1;
                 ctx.fillStyle = c.color;
-                ctx.fillRect(c.x, c.y, c.size, c.size); 
+                ctx.fillRect(c.x, c.y, c.size, c.size);
                 if (c.y > canvas.height) confetti.splice(index, 1);
             });
             if (confetti.length > 0) requestAnimationFrame(drawConfetti);
         }
 
-        // REVEAL ANIMATION
+        // REVEAL
         function revealSurprise() {
-            const gameArea = document.getElementById('game-area');
+            const game = document.getElementById('game-area');
             const card = document.getElementById('card-content');
             
-            // Hide game
-            gameArea.style.opacity = '0';
+            game.style.opacity = '0';
             setTimeout(() => {
-                gameArea.style.display = 'none';
-                
-                // Show card
+                game.style.display = 'none';
                 card.style.display = 'block';
-                requestAnimationFrame(() => {
-                    card.style.opacity = '1';
-                });
-                
+                requestAnimationFrame(() => card.style.opacity = '1');
                 createConfetti();
                 drawConfetti();
             }, 500);
