@@ -93,11 +93,14 @@
             box-shadow: 0 20px 60px var(--shadow); text-align: center; position: relative;
         }
 
-        /* SWAPPING LOGIC (IMAGES & TEXT) */
-        .content-night { display: none; } /* Hide night stuff by default */
+        /* --- THE CRITICAL FIX: SWAPPING LOGIC --- */
+        /* By default (Light Mode): Show Day, Hide Night */
+        .content-day { display: block !important; }
+        .content-night { display: none !important; }
         
-        body.dark-mode .content-day { display: none; } /* Hide day stuff in dark mode */
-        body.dark-mode .content-night { display: block; } /* Show night stuff in dark mode */
+        /* In Dark Mode: Hide Day, Show Night */
+        body.dark-mode .content-day { display: none !important; }
+        body.dark-mode .content-night { display: block !important; }
 
         /* POLAROID FRAME */
         .photo-frame {
