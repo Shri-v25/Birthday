@@ -9,11 +9,11 @@
     <style>
         :root {
             /* --- DAY THEME (Coquette Aesthetic) --- */
-            --bg-color: #fdf6f6;       /* Very Pale Pink/White */
-            --card-bg: #ffffff;        /* Pure White */
-            --text-main: #5d4037;      /* Deep Brown (High Contrast) */
-            --text-sub: #795548;       /* Softer Brown */
-            --accent: #d8829d;         /* Coquette Rose */
+            --bg-color: #fdf6f6;       
+            --card-bg: #ffffff;        
+            --text-main: #5d4037;      
+            --text-sub: #795548;       
+            --accent: #d8829d;         
             --border: #ebd4d4;         
             --shadow: rgba(93, 64, 55, 0.1);
             --toggle-bg: #faeaea;
@@ -22,11 +22,11 @@
 
         body.dark-mode {
             /* --- NIGHT THEME (Cinema/Luxe) --- */
-            --bg-color: #121212;       /* Cinematic Black */
-            --card-bg: #1e1e1e;        /* Dark Grey Card */
-            --text-main: #ececec;      /* Bright White */
-            --text-sub: #b0b0b0;       /* Silver */
-            --accent: #e0b0ff;         /* Mauve/Purple Glow */
+            --bg-color: #121212;       
+            --card-bg: #1e1e1e;        
+            --text-main: #ececec;      
+            --text-sub: #b0b0b0;       
+            --accent: #e0b0ff;         
             --border: #333333;
             --shadow: rgba(0, 0, 0, 0.5);
             --toggle-bg: #2d2d2d;
@@ -58,7 +58,7 @@
             padding: 20px;
         }
 
-        /* 2. TOGGLE BUTTON (Top Right) */
+        /* 2. TOGGLE BUTTON */
         .mode-toggle {
             position: absolute;
             top: 20px;
@@ -139,7 +139,7 @@
             min-height: 20px;
         }
 
-        /* 4. THE SURPRISE CARD (Hidden) */
+        /* 4. THE SURPRISE CARD */
         #card-content {
             display: none;
             opacity: 0;
@@ -155,23 +155,34 @@
             position: relative;
         }
 
-        /* 5. POLAROID FRAME (No Cropping) */
+        /* 5. POLAROID FRAME & IMAGE SWAPPING LOGIC */
         .photo-frame {
-            background: #fff; /* Always white for Polaroid look */
+            background: #fff; 
             padding: 15px 15px 50px 15px; 
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             margin-bottom: 30px;
             transform: rotate(-2deg); 
             transition: transform 0.5s ease;
             border: 1px solid #eee;
+            position: relative; /* Needed for swapping */
         }
         .photo-frame:hover { transform: rotate(0deg) scale(1.02); }
 
         .photo-frame img {
             width: 100%;
-            height: auto; /* Ensures full image is visible */
+            height: auto;
             display: block;
         }
+
+        /* LOGIC FOR IMAGE SWAPPING */
+        .img-night {
+            display: none; /* Hide dark image by default */
+        }
+        
+        /* When Body is Dark Mode, Hide Day Image, Show Night Image */
+        body.dark-mode .img-day { display: none; }
+        body.dark-mode .img-night { display: block; }
+
 
         /* 6. TYPOGRAPHY */
         h1 {
@@ -185,7 +196,7 @@
             font-size: 1rem;
             line-height: 1.7;
             color: var(--text-sub);
-            font-weight: 500; /* Bolder text for visibility */
+            font-weight: 500;
             margin-bottom: 30px;
         }
         .signature {
@@ -195,7 +206,7 @@
             color: var(--text-main);
         }
 
-        /* 7. ILLUSTRATIONS (Coquette Bows & Sparkles) */
+        /* 7. ILLUSTRATIONS */
         .bg-deco {
             position: absolute;
             pointer-events: none;
@@ -204,15 +215,13 @@
             fill: var(--accent);
             opacity: 0.3;
         }
-        /* Day Mode: Bows */
         .bow { opacity: 0.5; }
-        /* Night Mode: Sparkles */
         .sparkle { opacity: 0; }
         
         body.dark-mode .bow { opacity: 0; }
         body.dark-mode .sparkle { opacity: 0.8; }
 
-        /* Confetti Canvas */
+        /* Confetti */
         #confetti-canvas {
             position: absolute;
             top: 0; left: 0;
@@ -257,7 +266,11 @@
 
         <div id="card-content">
             <div class="photo-frame">
-                <img src="mom.jpg" alt="Mom">
+                
+                <img src="mom.jpg" class="img-day" alt="Mom Day">
+                
+                <img src="mom-dark.jpeg" class="img-night" alt="Mom Night">
+            
             </div>
             
             <h1>Happy Birthday!</h1>
@@ -277,22 +290,18 @@
     </div>
 
     <script>
-        // THEME TOGGLE
         function toggleTheme() {
             document.body.classList.toggle('dark-mode');
         }
 
-        // GAME LOGIC
         function checkAnswer() {
             const input = document.getElementById('guess-input');
             const errorMsg = document.getElementById('error-msg');
             const answer = input.value.trim().toLowerCase();
             
-            // Accepted answers
             if (answer.includes('shivashri') || answer.includes('shri') || answer.includes('me') || answer.includes('i do')) {
                 revealSurprise();
             } else {
-                // Shake effect for wrong answer
                 input.style.borderColor = 'red';
                 errorMsg.style.opacity = '1';
                 setTimeout(() => {
@@ -302,7 +311,6 @@
             }
         }
 
-        // CONFETTI
         const canvas = document.getElementById('confetti-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -335,7 +343,6 @@
             if (confetti.length > 0) requestAnimationFrame(drawConfetti);
         }
 
-        // REVEAL
         function revealSurprise() {
             const game = document.getElementById('game-area');
             const card = document.getElementById('card-content');
