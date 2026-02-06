@@ -8,7 +8,7 @@
     
     <style>
         :root {
-            /* --- DAY THEME (Coquette Aesthetic) --- */
+            /* DAY THEME */
             --bg-color: #fdf6f6;       
             --card-bg: #ffffff;        
             --text-main: #5d4037;      
@@ -21,7 +21,7 @@
         }
 
         body.dark-mode {
-            /* --- NIGHT THEME (Cinema/Luxe) --- */
+            /* NIGHT THEME */
             --bg-color: #121212;       
             --card-bg: #1e1e1e;        
             --text-main: #ececec;      
@@ -33,201 +33,106 @@
             --input-bg: #2d2d2d;
         }
 
-        /* 1. LAYOUT & RESET */
         * { box-sizing: border-box; }
         body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
+            margin: 0; padding: 0; height: 100%;
             font-family: 'Montserrat', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             transition: background 0.8s ease, color 0.8s ease;
-            overflow: hidden; 
-            position: relative;
+            overflow: hidden; position: relative;
         }
 
         .container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            position: relative;
-            z-index: 10;
-            padding: 20px;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            height: 100vh; position: relative; z-index: 10; padding: 20px;
         }
 
-        /* 2. TOGGLE BUTTON */
+        /* TOGGLE BUTTON */
         .mode-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--toggle-bg);
-            border: 1px solid var(--border);
-            padding: 10px 20px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-family: 'Playfair Display', serif;
-            font-size: 0.9rem;
-            color: var(--text-main);
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            z-index: 100;
-            box-shadow: 0 4px 10px var(--shadow);
+            position: absolute; top: 20px; right: 20px;
+            background: var(--toggle-bg); border: 1px solid var(--border);
+            padding: 10px 20px; border-radius: 50px; cursor: pointer;
+            font-family: 'Playfair Display', serif; font-size: 0.9rem;
+            color: var(--text-main); letter-spacing: 1px;
+            transition: all 0.3s ease; z-index: 100;
         }
-        .mode-toggle:hover { transform: scale(1.05); }
 
-        /* 3. GAME SECTION */
+        /* GAME SECTION */
         #game-area {
-            text-align: center;
-            transition: opacity 0.5s ease;
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid var(--border);
+            text-align: center; transition: opacity 0.5s ease;
+            background: var(--card-bg); padding: 40px;
+            border-radius: 20px; border: 1px solid var(--border);
             box-shadow: 0 10px 30px var(--shadow);
         }
-
         .riddle-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
-            margin-bottom: 25px;
-            line-height: 1.4;
-            color: var(--text-main);
+            font-family: 'Playfair Display', serif; font-size: 1.6rem;
+            margin-bottom: 25px; line-height: 1.4; color: var(--text-main);
         }
-
         .game-input {
-            display: block;
-            margin: 0 auto 20px auto;
-            background: var(--input-bg);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 15px;
-            width: 100%;
-            max-width: 300px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.1rem;
-            color: var(--text-main);
-            text-align: center;
-            outline: none;
-            transition: 0.3s;
+            display: block; margin: 0 auto 20px auto;
+            background: var(--input-bg); border: 1px solid var(--border);
+            border-radius: 10px; padding: 15px; width: 100%; max-width: 300px;
+            font-family: 'Montserrat', sans-serif; font-size: 1.1rem;
+            color: var(--text-main); text-align: center; outline: none; transition: 0.3s;
         }
         .game-input:focus { border-color: var(--accent); }
-
         .unlock-btn {
-            background: var(--accent);
-            border: none;
-            color: #fff;
-            padding: 15px 40px;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            letter-spacing: 1px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .unlock-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
-
-        .error-msg {
-            color: #e57373;
-            margin-top: 15px;
-            font-size: 0.9rem;
-            opacity: 0;
-            transition: opacity 0.3s;
-            min-height: 20px;
+            background: var(--accent); border: none; color: #fff;
+            padding: 15px 40px; font-family: 'Playfair Display', serif;
+            font-size: 1.1rem; border-radius: 50px; cursor: pointer;
+            transition: all 0.3s ease; letter-spacing: 1px;
         }
 
-        /* 4. THE SURPRISE CARD */
+        /* SURPRISE CARD */
         #card-content {
-            display: none;
-            opacity: 0;
-            transition: opacity 1.5s ease;
-            width: 100%;
-            max-width: 420px;
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid var(--border);
-            box-shadow: 0 20px 60px var(--shadow);
-            text-align: center;
-            position: relative;
+            display: none; opacity: 0; transition: opacity 1.5s ease;
+            width: 100%; max-width: 420px; background: var(--card-bg);
+            padding: 30px; border-radius: 15px; border: 1px solid var(--border);
+            box-shadow: 0 20px 60px var(--shadow); text-align: center; position: relative;
         }
 
-        /* 5. POLAROID FRAME & IMAGE SWAPPING LOGIC */
+        /* SWAPPING LOGIC (IMAGES & TEXT) */
+        .content-night { display: none; } /* Hide night stuff by default */
+        
+        body.dark-mode .content-day { display: none; } /* Hide day stuff in dark mode */
+        body.dark-mode .content-night { display: block; } /* Show night stuff in dark mode */
+
+        /* POLAROID FRAME */
         .photo-frame {
-            background: #fff; 
-            padding: 15px 15px 50px 15px; 
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-            transform: rotate(-2deg); 
-            transition: transform 0.5s ease;
+            background: #fff; padding: 15px 15px 50px 15px; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1); margin-bottom: 30px;
+            transform: rotate(-2deg); transition: transform 0.5s ease;
             border: 1px solid #eee;
-            position: relative; /* Needed for swapping */
         }
         .photo-frame:hover { transform: rotate(0deg) scale(1.02); }
+        .photo-frame img { width: 100%; height: auto; display: block; }
 
-        .photo-frame img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* LOGIC FOR IMAGE SWAPPING */
-        .img-night {
-            display: none; /* Hide dark image by default */
-        }
-        
-        /* When Body is Dark Mode, Hide Day Image, Show Night Image */
-        body.dark-mode .img-day { display: none; }
-        body.dark-mode .img-night { display: block; }
-
-
-        /* 6. TYPOGRAPHY */
+        /* TYPOGRAPHY */
         h1 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 2rem;
-            margin: 0 0 15px 0;
-            color: var(--accent);
+            font-family: 'Playfair Display', serif; font-weight: 700;
+            font-size: 2rem; margin: 0 0 15px 0; color: var(--accent);
         }
         p {
-            font-size: 1rem;
-            line-height: 1.7;
-            color: var(--text-sub);
-            font-weight: 500;
-            margin-bottom: 30px;
+            font-size: 1rem; line-height: 1.7; color: var(--text-sub);
+            font-weight: 500; margin-bottom: 30px;
         }
         .signature {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 1.2rem;
-            color: var(--text-main);
+            font-family: 'Playfair Display', serif; font-style: italic;
+            font-size: 1.2rem; color: var(--text-main);
         }
 
-        /* 7. ILLUSTRATIONS */
+        /* BACKGROUND DECOR */
         .bg-deco {
-            position: absolute;
-            pointer-events: none;
-            transition: opacity 0.8s ease;
-            z-index: 1;
-            fill: var(--accent);
-            opacity: 0.3;
+            position: absolute; pointer-events: none; transition: opacity 0.8s ease;
+            z-index: 1; fill: var(--accent); opacity: 0.3;
         }
-        .bow { opacity: 0.5; }
-        .sparkle { opacity: 0; }
-        
-        body.dark-mode .bow { opacity: 0; }
-        body.dark-mode .sparkle { opacity: 0.8; }
-
-        /* Confetti */
+        .bow { opacity: 0.5; } .sparkle { opacity: 0; }
+        body.dark-mode .bow { opacity: 0; } body.dark-mode .sparkle { opacity: 0.8; }
         #confetti-canvas {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 50;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 50;
         }
     </style>
 </head>
@@ -235,132 +140,90 @@
 
     <button class="mode-toggle" onclick="toggleTheme()">Day / Night</button>
 
-    <svg class="bg-deco bow" width="100" height="100" viewBox="0 0 100 100" style="top:10%; left:5%; transform:rotate(-15deg);">
-        <path d="M50 50 C 30 20, 0 30, 20 60 C 30 70, 45 55, 50 50 C 55 55, 70 70, 80 60 C 100 30, 70 20, 50 50 Z" />
-        <path d="M50 50 L 30 90 M 50 50 L 70 90" stroke="currentColor" stroke-width="3" fill="none"/>
-    </svg>
-    <svg class="bg-deco bow" width="120" height="120" viewBox="0 0 100 100" style="bottom:10%; right:5%; transform:rotate(15deg);">
-        <path d="M50 50 C 30 20, 0 30, 20 60 C 30 70, 45 55, 50 50 C 55 55, 70 70, 80 60 C 100 30, 70 20, 50 50 Z" />
-        <path d="M50 50 L 30 90 M 50 50 L 70 90" stroke="currentColor" stroke-width="3" fill="none"/>
-    </svg>
-
-    <svg class="bg-deco sparkle" width="40" height="40" viewBox="0 0 50 50" style="top:15%; right:10%;">
-        <polygon points="25,0 30,20 50,25 30,30 25,50 20,30 0,25 20,20"/>
-    </svg>
-    <svg class="bg-deco sparkle" width="60" height="60" viewBox="0 0 50 50" style="bottom:20%; left:8%;">
-        <polygon points="25,0 30,20 50,25 30,30 25,50 20,30 0,25 20,20"/>
-    </svg>
+    <svg class="bg-deco bow" width="100" height="100" viewBox="0 0 100 100" style="top:10%; left:5%; transform:rotate(-15deg);"><path d="M50 50 C 30 20, 0 30, 20 60 C 30 70, 45 55, 50 50 C 55 55, 70 70, 80 60 C 100 30, 70 20, 50 50 Z" /><path d="M50 50 L 30 90 M 50 50 L 70 90" stroke="currentColor" stroke-width="3" fill="none"/></svg>
+    <svg class="bg-deco bow" width="120" height="120" viewBox="0 0 100 100" style="bottom:10%; right:5%; transform:rotate(15deg);"><path d="M50 50 C 30 20, 0 30, 20 60 C 30 70, 45 55, 50 50 C 55 55, 70 70, 80 60 C 100 30, 70 20, 50 50 Z" /><path d="M50 50 L 30 90 M 50 50 L 70 90" stroke="currentColor" stroke-width="3" fill="none"/></svg>
+    <svg class="bg-deco sparkle" width="40" height="40" viewBox="0 0 50 50" style="top:15%; right:10%;"><polygon points="25,0 30,20 50,25 30,30 25,50 20,30 0,25 20,20"/></svg>
+    <svg class="bg-deco sparkle" width="60" height="60" viewBox="0 0 50 50" style="bottom:20%; left:8%;"><polygon points="25,0 30,20 50,25 30,30 25,50 20,30 0,25 20,20"/></svg>
 
     <canvas id="confetti-canvas"></canvas>
 
     <div class="container">
-        
         <div id="game-area">
-            <div class="riddle-text">
-                To open this gift,<br>guess who misses you the most?
-            </div>
+            <div class="riddle-text">To open this gift,<br>guess who misses you the most?</div>
             <input type="text" id="guess-input" class="game-input" placeholder="Type name here..." autocomplete="off">
             <button class="unlock-btn" onclick="checkAnswer()">Unlock</button>
-            <div id="error-msg" class="error-msg">Hint: It's your favorite child!</div>
+            <div id="error-msg" style="color:red; opacity:0; margin-top:10px; transition:0.3s">Hint: It's your favorite child!</div>
         </div>
 
         <div id="card-content">
             <div class="photo-frame">
-                
-                <img src="mom.jpg" class="img-day" alt="Mom Day">
-                
-                <img src="mom-dark.jpeg" class="img-night" alt="Mom Night">
-            
+                <img src="mom.jpeg" class="content-day" alt="Mom Day">
+                <img src="mom-dark.jpeg" class="content-night" alt="Mom Night">
             </div>
             
             <h1>Happy Birthday!</h1>
             
-            <p>
-                To the woman who does it all. <br>
-                Even though I am miles away studying, 
-                my heart is celebrating with you today.
-                <br><br>
+            <p class="content-day">
+                To the woman who does it all.<br>
+                Even though I am miles away studying, my heart is celebrating with you today.<br><br>
                 Thank you for being my inspiration.
             </p>
+
+            <p class="content-night">
+                As the stars come out...<br>
+                I hope you had the most beautiful day.<br>
+                Sending you warm hugs and peaceful dreams.<br><br>
+                Goodnight, Mom. Love you!
+            </p>
             
-            <div class="signature">
-                With love, Shivashri
-            </div>
+            <div class="signature">With love, Shivashri</div>
         </div>
     </div>
 
     <script>
-        function toggleTheme() {
-            document.body.classList.toggle('dark-mode');
-        }
-
+        function toggleTheme() { document.body.classList.toggle('dark-mode'); }
+        
         function checkAnswer() {
             const input = document.getElementById('guess-input');
-            const errorMsg = document.getElementById('error-msg');
-            const answer = input.value.trim().toLowerCase();
-            
-            if (answer.includes('shivashri') || answer.includes('shri') || answer.includes('me') || answer.includes('i do')) {
-                revealSurprise();
-            } else {
-                input.style.borderColor = 'red';
-                errorMsg.style.opacity = '1';
+            const val = input.value.trim().toLowerCase();
+            if (val.includes('shivashri') || val.includes('shri') || val.includes('me')) {
+                const game = document.getElementById('game-area');
+                const card = document.getElementById('card-content');
+                game.style.opacity = '0';
                 setTimeout(() => {
-                    input.style.borderColor = 'var(--border)';
-                    errorMsg.style.opacity = '0';
-                }, 2000);
+                    game.style.display = 'none';
+                    card.style.display = 'block';
+                    requestAnimationFrame(() => card.style.opacity = '1');
+                    createConfetti(); drawConfetti();
+                }, 500);
+            } else {
+                document.getElementById('error-msg').style.opacity = '1';
             }
         }
 
         const canvas = document.getElementById('confetti-canvas');
         const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
         let confetti = [];
         const colors = ['#d8829d', '#ffc1cc', '#e6dcdc', '#ffffff'];
 
         function createConfetti() {
-            for (let i = 0; i < 100; i++) {
-                confetti.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height - canvas.height,
-                    color: colors[Math.floor(Math.random() * colors.length)],
-                    size: Math.random() * 5 + 2,
-                    speed: Math.random() * 3 + 1,
-                    oscillation: Math.random() * 20
-                });
-            }
+            for (let i = 0; i < 100; i++) confetti.push({
+                x: Math.random()*canvas.width, y: Math.random()*canvas.height-canvas.height,
+                color: colors[Math.floor(Math.random()*colors.length)],
+                size: Math.random()*5+2, speed: Math.random()*3+1
+            });
         }
-
         function drawConfetti() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            confetti.forEach((c, index) => {
-                c.y += c.speed;
-                c.x += Math.sin(c.y / 30) * 1;
-                ctx.fillStyle = c.color;
-                ctx.fillRect(c.x, c.y, c.size, c.size);
-                if (c.y > canvas.height) confetti.splice(index, 1);
+            confetti.forEach((c, i) => {
+                c.y += c.speed; c.x += Math.sin(c.y/30);
+                ctx.fillStyle = c.color; ctx.fillRect(c.x, c.y, c.size, c.size);
+                if(c.y > canvas.height) confetti.splice(i, 1);
             });
-            if (confetti.length > 0) requestAnimationFrame(drawConfetti);
+            if(confetti.length>0) requestAnimationFrame(drawConfetti);
         }
-
-        function revealSurprise() {
-            const game = document.getElementById('game-area');
-            const card = document.getElementById('card-content');
-            
-            game.style.opacity = '0';
-            setTimeout(() => {
-                game.style.display = 'none';
-                card.style.display = 'block';
-                requestAnimationFrame(() => card.style.opacity = '1');
-                createConfetti();
-                drawConfetti();
-            }, 500);
-        }
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
+        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
     </script>
 </body>
 </html>
