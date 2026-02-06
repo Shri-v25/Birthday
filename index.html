@@ -5,15 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Mom</title>
     <style>
-        /* 1. Minimalist Reset & Typography */
+        /* --- COQUETTE PASTEL COLOR PALETTE --- */
+        :root {
+            --bg-color: #fff0f5; /* Lavender Blush background */
+            --card-bg: #fffbf0;  /* Creamy Ivory card */
+            --polaroid-bg: #ffffff; /* Pure white for photo frame */
+            --text-color: #5a4a4a; /* Warm, soft charcoal */
+            --accent-pink: #ff9eb5; /* Dusty rose for buttons */
+            --accent-hover: #ff8fab; /* Slightly darker pink hover */
+            --shadow-color: rgba(90, 74, 74, 0.15); /* Softer shadow */
+        }
+
+        /* 1. Reset & Typography */
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            background-color: #f9f9f9; /* Soft off-white */
-            color: #333;
-            overflow: hidden; /* Prevents scrollbars during animation */
+            /* Using a slightly softer font stack */
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            /* Optional subtle background pattern */
+            background-image: radial-gradient(circle at 50% 50%, #ffffff 0%, var(--bg-color) 100%);
+            color: var(--text-color);
+            overflow: hidden;
         }
 
         /* 2. Centering Container */
@@ -22,81 +36,98 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh; /* Ensure full height */
             text-align: center;
             position: relative;
             z-index: 2;
+            padding: 20px; /* Add padding for smaller screens */
+            box-sizing: border-box;
         }
 
-        /* 3. The "Open Me" Button */
+        /* 3. The Pastel Button */
         #start-btn {
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
+            padding: 18px 45px;
+            font-size: 1.3rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            background: #333;
+            background: var(--accent-pink);
             color: white;
             border: none;
             cursor: pointer;
-            border-radius: 50px;
-            transition: transform 0.2s ease, background 0.3s ease;
+            border-radius: 30px; /* Softer, less round corners */
+            box-shadow: 0 4px 15px var(--accent-pink);
+            transition: all 0.3s ease;
+            font-weight: 600;
         }
 
         #start-btn:hover {
-            transform: scale(1.05);
-            background: #555;
+            transform: translateY(-3px) scale(1.02);
+            background: var(--accent-hover);
+            box-shadow: 0 6px 20px var(--accent-hover);
         }
 
         /* 4. The Hidden Content (Card) */
         #card-content {
-            display: none; /* Hidden initially */
+            display: none;
             opacity: 0;
-            transition: opacity 2s ease;
-            max-width: 90%;
-            width: 400px;
+            transition: opacity 1.5s ease;
+            max-width: 420px;
+            width: 100%;
             padding: 40px;
-            background: white;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
-            border-radius: 8px;
+            background: var(--card-bg);
+            box-shadow: 0 20px 60px var(--shadow-color);
+            border-radius: 20px; /* Softer corners */
+            border: 2px solid #fae1e9; /* Subtle pink border */
+            box-sizing: border-box;
         }
 
-        /* Image Placeholder */
+        /* --- VINTAGE POLAROID FRAME STYLING --- */
         .photo-frame {
-            width: 100%;
-            height: 300px;
-            background-color: #eee;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            border-radius: 4px;
+            background-color: var(--polaroid-bg);
+            /* Polaroid margins: thick bottom, thinner sides/top */
+            padding: 15px 15px 60px 15px; 
+            box-shadow: 5px 10px 20px rgba(0,0,0,0.1);
+            /* Subtle vintage tilt */
+            transform: rotate(-3deg); 
+            margin-bottom: 40px;
+            border: 1px solid #eee;
+            transition: transform 0.3s ease;
+        }
+        
+        /* Slight hover effect on the photo */
+        .photo-frame:hover {
+            transform: rotate(0deg) scale(1.02);
         }
 
         .photo-frame img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto; /* Let height fit automatically so no cropping occurs */
+            display: block; /* Removes tiny gap under image */
+            /* Optional: adds a slight aged sepia tone to photo. Delete line below if unwanted. */
+            filter: sepia(10%) contrast(95%); 
         }
 
+        /* Typography Styling */
         h1 {
-            font-weight: 300;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: #222;
+            font-weight: 400;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            letter-spacing: 1px;
         }
 
         p {
-            line-height: 1.6;
-            color: #666;
-            font-size: 0.95rem;
-            margin-bottom: 20px;
+            line-height: 1.8;
+            color: var(--text-color);
+            font-size: 1.05rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
         }
 
         .signature {
-            font-style: italic;
-            font-size: 0.9rem;
-            color: #888;
+            font-family: 'Brush Script MT', cursive; /* More handwriting style */
+            font-size: 1.5rem;
+            color: var(--accent-pink);
             margin-top: 30px;
         }
 
@@ -117,46 +148,51 @@
     <canvas id="confetti-canvas"></canvas>
 
     <div class="container">
-        <button id="start-btn" onclick="revealSurprise()">For Mom</button>
+        <button id="start-btn" onclick="revealSurprise()">Open For Surprise</button>
 
         <div id="card-content">
             <div class="photo-frame">
-                <img src="mom.jpeg" alt="Us" style="width:100%; height:100%; object-fit:cover;">
+                <img src="mom.jpeg" alt="Us together" onerror="this.parentElement.innerHTML='<div style=\'padding:40px; color:pink\'>Photo not found. Please check exact filename on GitHub.</div>'"> 
             </div>
             
             <h1>Happy Birthday, Mom</h1>
             
             <p>
                 I may be miles away studying right now, but I'm celebrating you today. 
-                Thank you for being my biggest supporter. I can't wait to see you again soon.
+                Thank you for being my biggest supporter and my best friend. I can't wait to squeeze you soon!
             </p>
             
             <div class="signature">
-                Love,<br>
-                Shivashri 
+                Love always,<br>
+                Shivashri
             </div>
         </div>
     </div>
 
     <script>
-        // Simple Confetti Logic
+        // Confetti Logic - Updated with Coquette Pastel Colors
         const canvas = document.getElementById('confetti-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
         let confetti = [];
-        const colors = ['#ffadad', '#ffd6a5', '#fdffb6', '#caffbf', '#9bf6ff', '#a0c4ff', '#bdb2ff'];
+        // New Pastel Palette: Baby blues, soft pinks, creams, mints
+        const colors = ['#ffb3c6', '#ffdfba', '#ffffba', '#baffc9', '#bae1ff', '#eecbff', '#fbf0fff'];
 
         function createConfetti() {
-            for (let i = 0; i < 100; i++) {
+            // Increased confetti count slightly for more festivity
+            for (let i = 0; i < 130; i++) {
                 confetti.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height - canvas.height,
                     color: colors[Math.floor(Math.random() * colors.length)],
-                    size: Math.random() * 5 + 2,
-                    speed: Math.random() * 3 + 2,
-                    oscillation: Math.random() * 20
+                    size: Math.random() * 7 + 3, // Slightly larger pieces
+                    speed: Math.random() * 4 + 2,
+                    oscillation: Math.random() * 20,
+                    // Add rotation to confetti pieces
+                    rotation: Math.random() * 360,
+                    rotationSpeed: (Math.random() - 0.5) * 10
                 });
             }
         }
@@ -165,11 +201,18 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             confetti.forEach((c, index) => {
                 c.y += c.speed;
-                c.x += Math.sin(c.y / 20) * 1; 
+                c.x += Math.sin(c.y / 20) * 1;
+                c.rotation += c.rotationSpeed; // Rotate pieces
+
+                ctx.save(); // Save current state
+                ctx.translate(c.x, c.y); // Move to piece position
+                ctx.rotate(c.rotation * Math.PI / 180); // Rotate
+
                 ctx.fillStyle = c.color;
-                ctx.beginPath();
-                ctx.arc(c.x, c.y, c.size, 0, Math.PI * 2);
-                ctx.fill();
+                // Draw squares instead of circles for a more vintage feel
+                ctx.fillRect(-c.size / 2, -c.size / 2, c.size, c.size);
+                
+                ctx.restore(); // Restore state for next piece
 
                 if (c.y > canvas.height) confetti.splice(index, 1);
             });
@@ -181,13 +224,17 @@
             const btn = document.getElementById('start-btn');
             const card = document.getElementById('card-content');
             
-            // Hide button
+            // Hide button smoothly
+            btn.style.transform = 'scale(0.8)';
             btn.style.opacity = '0';
             setTimeout(() => btn.style.display = 'none', 300);
 
-            // Show card
+            // Show card smoothly
             card.style.display = 'block';
-            setTimeout(() => card.style.opacity = '1', 100);
+            // Use a slight delay to allow display:block to register before opacity kicks in
+            requestAnimationFrame(() => {
+                 card.style.opacity = '1';
+            });
 
             // Start Confetti
             createConfetti();
